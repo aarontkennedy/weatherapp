@@ -1,6 +1,8 @@
 import axios from "axios";
 import helpers from "./helpers";
 
+var moment = require('moment');
+
 // https://www.weatherapi.com/api-explorer.aspx
 const baseUrl = "https://api.weatherapi.com/v1/";
 // todo: import key from file that is included in gitignore
@@ -23,7 +25,12 @@ export default {
     getHistory: function (queryString, daysBack = 1) {
         helpers.assert((daysBack > 0 && daysBack < 7), `getHistory(${queryString}, ${daysBack}) bad day input`);
         helpers.assert(queryString, `getHistory(${queryString}, ${daysBack}) bad queryString`);
-        const url = `${baseUrl}history.json?${keyString}&q=${queryString}&dt=2020-02-02`;
+        
+        const day = moment().subtract(daysBack, 'days').format('YYYY-MM-DD');
+        helpers.log(day);
+        
+        const url = `${baseUrl}history.json?${keyString}&q=${queryString}&dt=${day}`;
+        helpers.log(url);
         return axios.get(url);
     },
     // getAstronomy: function(queryString, date) {

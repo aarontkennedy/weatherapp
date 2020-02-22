@@ -33,9 +33,9 @@ class WeatherDisplay extends Component {
             return "";
         }
         if (this.props.metric) {
-            return  this.props.data.temp_c + "\u00b0C";
+            return  Math.round(this.props.data.temp_c) + "\u00b0C";
         }
-        return this.props.data.temp_f + "\u00b0F";
+        return Math.round(this.props.data.temp_f) + "\u00b0F";
     }
 
     wind = () => {

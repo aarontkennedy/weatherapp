@@ -34,6 +34,8 @@ class ForecastDisplay extends Component {
         }
         let min = (this.props.metric) ? this.props.data.mintemp_c : this.props.data.mintemp_f;
         let max = (this.props.metric) ? this.props.data.maxtemp_c : this.props.data.maxtemp_f;
+        min = Math.round(min);
+        max = Math.round(max);
         let units = (this.props.metric) ? "\u00b0C" : "\u00b0F";
 
         return `${min} - ${max}${units}`;
