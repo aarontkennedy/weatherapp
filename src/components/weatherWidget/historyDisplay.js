@@ -29,17 +29,18 @@ class HistoryDisplay extends Component {
 
     render() {
         return (
-            <div className="WeatherDisplay">
-                <ul>
-                    <li>
-                        <span className="label">Avg Temp: </span>
-                        <span>{this.temperature()}</span>
-                    </li>
-                    <li>
-                        <span className="label">Total Precipitation: </span>
-                        <span>{this.precipitation()}</span>
-                    </li>
-                </ul>
+            <div className="weather-display">
+                <h2 className="weather-display__title">
+                    Last Week
+                </h2>   
+                <p className="weather-display__row">
+                    <span className="label">Avg Temp: </span>
+                    <span>{this.temperature()}</span>
+                </p>
+                <p className="weather-display__row">
+                    <span className="weather-display__label">Precipitation: </span>
+                    <span className="weather-display__value">{this.precipitation()}</span>
+                </p>
             </div>
         );
     }

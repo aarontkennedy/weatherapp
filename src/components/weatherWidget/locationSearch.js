@@ -67,17 +67,14 @@ class LocationSearch extends Component {
 
     render() {
         return (
-            <div>
-                <label
-                    htmlFor="locationSearchAutocomplete"
-                    id="locationSearchLabel">
-                    <input
-                        type="text"
-                        id="locationSearch"
-                        placeholder="City or Zip"
-                        onChange={this.handleChange}
-                        defaultValue={this.props.defaultValue} />
-                </label>
+            <div className="weather-display__search">
+                <input
+                    size="50"
+                    type="text"
+                    id="locationSearch"
+                    placeholder="City or Zip"
+                    onChange={this.handleChange}
+                    defaultValue={this.props.defaultValue} />
             </div >);
     }
 }

@@ -1,38 +1,59 @@
-.App {
+.weather-widget {
+  display: flex;
+  flex-flow: row wrap; 
+  width: 100%;
+  justify-content: center;
+}
+
+.weather-display, footer, .weather-display__search {
+  border-radius: 1em;
+  margin: .5em;
+  padding: 1em;
+  min-width: fit-content;
+}
+
+.weather-display__search, footer, header {
+  flex: 0 0 100%; 
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.weather-display__search input {
+  padding:.25em;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.weather-display__icon_holder, .weather-display__title {
+  text-align: center;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.weather-display__title {
+  font-weight: bold;
 }
 
-.App-link {
-  color: #61dafb;
+header {
+  font-size: 1.5em;
+  font-weight: bold;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+footer button {
+  margin: .5em;
+  border-radius: .5em;
+}
+
+.weather-display{
+  border: thin solid black;
+}
+
+.weather-display__title, 
+.weather-display__icon_holder, 
+.weather-display__label,
+.weather-display__value,
+.weather-display__row {
+  font-size: 1em;
+  margin: 0em;
+  padding: 0em;
+}
+
+.autocomplete-suggestions {
+  background-color: white;
+  overflow: hidden;
 }

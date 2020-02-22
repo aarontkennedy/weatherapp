@@ -69,26 +69,29 @@ class WeatherDisplay extends Component {
 
     render() {
         return (
-            <div className="WeatherDisplay">
-                {this.getIconImageTag()}
-                <ul>
-                    <li>
-                        <span className="label">Temp: </span>
-                        <span>{this.temperature()}</span>
-                    </li>
-                    <li>
-                        <span className="label">Wind: </span>
-                        <span>{this.wind()}</span>
-                    </li>
-                    <li>
-                        <span className="label">Precipitation: </span>
-                        <span>{this.precipitation()}</span>
-                    </li>
-                    <li>
-                        <span className="label">Humidity: </span>
-                        <span>{this.humidity()}</span>
-                    </li>
-                </ul>
+            <div className="weather-display">
+                <h2 className="weather-display__title">
+                    Today
+                </h2>                
+                <p className="weather-display__icon_holder">
+                    {this.getIconImageTag()}
+                </p>
+                <p className="weather-display__row">
+                    <span className="weather-display__label">Temp: </span>
+                    <span className="weather-display__value">{this.temperature()}</span>
+                </p>
+                <p className="weather-display__row">
+                    <span className="weather-display__label">Wind: </span>
+                    <span className="weather-display__value">{this.wind()}</span>
+                </p>
+                <p className="weather-display__row">
+                    <span className="weather-display__label">Precipitation: </span>
+                    <span className="weather-display__value">{this.precipitation()}</span>
+                </p>
+                <p className="weather-display__row">
+                    <span className="weather-display__label">Humidity: </span>
+                    <span className="weather-display__value">{this.humidity()}</span>
+                </p>
             </div>
         );
     }

@@ -6,6 +6,7 @@ import WeatherDisplay from "./weatherDisplay";
 import ForecastDisplay from "./forecastDisplay";
 import HistoryDisplay from "./historyDisplay";
 
+
 class WeatherWidget extends Component {
     constructor(props) {
         super(props);
@@ -16,6 +17,11 @@ class WeatherWidget extends Component {
             location: null,
             current: null,
             tomorrow: null,
+            twoDaysOut: null,
+            threeDaysOut: null,
+            tomorrowData: null,
+            twoDaysOutData: null,
+            threeDaysOutData: null,
             history: null
         };
     }
@@ -50,28 +56,23 @@ class WeatherWidget extends Component {
     populateLocationInformation = () => {
         helpers.log(`populateSelectedLocation ${this.state.query}`);
 
-        // not necessary, forecast also returns current
-        // callWeatherApi.getCurrent(this.state.query)
-        //     .then((data) => {
-        //         this.setState({ current: data.data.current });
-        //         helpers.log(this.state);
-        //     })
-        //     .catch((e) => {
-        //         helpers.log(e);
-        //     });
-
-        callWeatherApi.getForecast(this.state.query)
-                .then((data) => {
-                    helpers.log(data.data);
-                    this.setState({ 
-                        current: data.data.current,
-                        tomorrow: data.data.forecast.forecastday[0].day,
-                    });
-                    helpers.log(this.state);
-                })
-                .catch((e) => {
-                    helpers.log(e);
+        callWeatherApi.getForecast(this.state.query, 4)
+            .then((data) => {
+                helpers.log(data.data);
+                this.setState({ 
+                    current: data.data.current,
+                    tomorrow: data.data.forecast.forecastday[1].date,
+                    twoDaysOut: data.data.forecast.forecastday[2].date,
+                    threeDaysOut: data.data.forecast.forecastday[3].date,
+                    tomorrowData: data.data.forecast.forecastday[1].day,
+                    twoDaysOutData: data.data.forecast.forecastday[2].day,
+                    threeDaysOutData: data.data.forecast.forecastday[3].day,
                 });
+                helpers.log(this.state);
+            })
+            .catch((e) => {
+                helpers.log(e);
+            });
 
         this.populateHistory();
     }
@@ -154,34 +155,47 @@ class WeatherWidget extends Component {
 
     render() {
         return (
-            <div className="WeatherWidget">
+            <div className="weather-widget">
+                <header>
+                    Weather App
+                </header>
 
                 <LocationSearch
                     defaultValue={this.state.query}
                     populateSelectedLocation={this.populateSelectedLocation}
                 />
 
-                <p>{this.state.query ? this.state.query : ""}</p>
-
-                <HistoryDisplay
-                    metric = {this.state.metric}
-                    data={this.state.history}
-                />
                 <WeatherDisplay
                     metric = {this.state.metric}
                     data={this.state.current}
                 />
                 <ForecastDisplay
+                    title = {this.state.tomorrow}
                     metric = {this.state.metric}
-                    data={this.state.tomorrow}
+                    data={this.state.tomorrowData}
+                />
+                <ForecastDisplay
+                    title = {this.state.twoDaysOut}
+                    metric = {this.state.metric}
+                    data={this.state.twoDaysOutData}
+                />
+                <ForecastDisplay
+                    title = {this.state.threeDaysOut}
+                    metric = {this.state.metric}
+                    data={this.state.threeDaysOutData}
+                />
+                <HistoryDisplay
+                    metric = {this.state.metric}
+                    data={this.state.history}
                 />
 
-                <button
-                    onClick={this.toggleMetric}
-                >{"\u00b0C"}/{"\u00b0F"}</button>
-                <p></p>
-                Powered by <a href="https://www.weatherapi.com/" title="Weather API">WeatherAPI.com</a>
+                <footer>
+                    <button
+                        onClick={this.toggleMetric}
+                    >{"\u00b0C"}/{"\u00b0F"}</button> 
 
+                    Powered by <a href="https://www.weatherapi.com/" title="Weather API">WeatherAPI.com</a>
+                </footer> 
             </div>
         );
     }

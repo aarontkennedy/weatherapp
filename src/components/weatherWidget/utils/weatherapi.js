@@ -17,9 +17,10 @@ export default {
         return axios.get(url);
     },
     getForecast: function (queryString, days = 1) {
-        helpers.assert((days > 0 && days < 3), `getForecast(${queryString}, ${days}) bad day input`);
+        helpers.assert((days > 0 && days < 5), `getForecast(${queryString}, ${days}) bad day input`);
         helpers.assert(queryString, `getForecast(${queryString}, ${days}) bad queryString`);
         const url = `${baseUrl}forecast.json?${keyString}&q=${queryString}&days=${days}`;
+        helpers.log(url);
         return axios.get(url);
     },
     getHistory: function (queryString, daysBack = 1) {
