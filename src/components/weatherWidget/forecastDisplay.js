@@ -71,7 +71,11 @@ class ForecastDisplay extends Component {
     }
              
     render() {
-        let date = moment(this.props.title, 'YYYY-MM-DD').format("MMM Do");
+        let date = "";
+        
+        if (this.props.title) {
+            date = moment(this.props.title, 'YYYY-MM-DD').format("MMM Do");
+        }
 
         return (
             <div className="weather-display">

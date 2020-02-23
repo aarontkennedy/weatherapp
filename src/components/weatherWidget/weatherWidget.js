@@ -82,6 +82,11 @@ class WeatherWidget extends Component {
         let precipSumMillimeters = 0;
         let avgTempSumFarenheit = 0;
         let avgTempSumCelcius = 0;
+        let avgLowTempSumFarenheit = 0;
+        let avgLowTempSumCelcius = 0;
+        let avgHighTempSumFarenheit = 0;
+        let avgHighTempSumCelcius = 0;
+
         const numDaysBack = 6;
         
         callWeatherApi.getHistory(this.state.query, 1)                
@@ -92,6 +97,10 @@ class WeatherWidget extends Component {
             precipSumMillimeters += dayData.totalprecip_mm;
             avgTempSumFarenheit += dayData.avgtemp_f;
             avgTempSumCelcius += dayData.avgtemp_c;
+            avgLowTempSumFarenheit += dayData.mintemp_f;
+            avgLowTempSumCelcius += dayData.mintemp_c;
+            avgHighTempSumFarenheit += dayData.maxtemp_f;
+            avgHighTempSumCelcius += dayData.maxtemp_c;
             return callWeatherApi.getHistory(this.state.query, 2) 
         })
         .then((data) => {
@@ -101,6 +110,10 @@ class WeatherWidget extends Component {
             precipSumMillimeters += dayData.totalprecip_mm;
             avgTempSumFarenheit += dayData.avgtemp_f;
             avgTempSumCelcius += dayData.avgtemp_c;
+            avgLowTempSumFarenheit += dayData.mintemp_f;
+            avgLowTempSumCelcius += dayData.mintemp_c;
+            avgHighTempSumFarenheit += dayData.maxtemp_f;
+            avgHighTempSumCelcius += dayData.maxtemp_c;
             return callWeatherApi.getHistory(this.state.query, 3) 
         })
         .then((data) => {
@@ -110,6 +123,10 @@ class WeatherWidget extends Component {
             precipSumMillimeters += dayData.totalprecip_mm;
             avgTempSumFarenheit += dayData.avgtemp_f;
             avgTempSumCelcius += dayData.avgtemp_c;
+            avgLowTempSumFarenheit += dayData.mintemp_f;
+            avgLowTempSumCelcius += dayData.mintemp_c;
+            avgHighTempSumFarenheit += dayData.maxtemp_f;
+            avgHighTempSumCelcius += dayData.maxtemp_c;
             return callWeatherApi.getHistory(this.state.query, 4) 
         })
         .then((data) => {
@@ -119,6 +136,10 @@ class WeatherWidget extends Component {
             precipSumMillimeters += dayData.totalprecip_mm;
             avgTempSumFarenheit += dayData.avgtemp_f;
             avgTempSumCelcius += dayData.avgtemp_c;
+            avgLowTempSumFarenheit += dayData.mintemp_f;
+            avgLowTempSumCelcius += dayData.mintemp_c;
+            avgHighTempSumFarenheit += dayData.maxtemp_f;
+            avgHighTempSumCelcius += dayData.maxtemp_c;
             return callWeatherApi.getHistory(this.state.query, 5) 
         })
         .then((data) => {
@@ -128,6 +149,10 @@ class WeatherWidget extends Component {
             precipSumMillimeters += dayData.totalprecip_mm;
             avgTempSumFarenheit += dayData.avgtemp_f;
             avgTempSumCelcius += dayData.avgtemp_c;
+            avgLowTempSumFarenheit += dayData.mintemp_f;
+            avgLowTempSumCelcius += dayData.mintemp_c;
+            avgHighTempSumFarenheit += dayData.maxtemp_f;
+            avgHighTempSumCelcius += dayData.maxtemp_c;
             return callWeatherApi.getHistory(this.state.query, 6) 
         })
         .then((data) => {
@@ -137,13 +162,21 @@ class WeatherWidget extends Component {
             precipSumMillimeters += dayData.totalprecip_mm;
             avgTempSumFarenheit += dayData.avgtemp_f;
             avgTempSumCelcius += dayData.avgtemp_c;
+            avgLowTempSumFarenheit += dayData.mintemp_f;
+            avgLowTempSumCelcius += dayData.mintemp_c;
+            avgHighTempSumFarenheit += dayData.maxtemp_f;
+            avgHighTempSumCelcius += dayData.maxtemp_c;
 
             this.setState({
                 history: {
-                    precip_in: precipSumInches/numDaysBack,
-                    precip_mm: precipSumMillimeters/numDaysBack,
+                    precip_in: precipSumInches,
+                    precip_mm: precipSumMillimeters,
                     avgtemp_f: avgTempSumFarenheit/numDaysBack,
-                    avgtemp_c: avgTempSumCelcius/numDaysBack
+                    avgtemp_c: avgTempSumCelcius/numDaysBack,
+                    avglowtemp_f: avgLowTempSumFarenheit/numDaysBack,
+                    avglowtemp_c: avgLowTempSumCelcius/numDaysBack,
+                    avghightemp_f: avgHighTempSumFarenheit/numDaysBack,
+                    avghightemp_c: avgHighTempSumCelcius/numDaysBack
                 }
             });
             helpers.log(this.state);
@@ -157,7 +190,7 @@ class WeatherWidget extends Component {
         return (
             <div className="weather-widget">
                 <header>
-                    Weather App
+                    WonderStorm
                 </header>
 
                 <LocationSearch
