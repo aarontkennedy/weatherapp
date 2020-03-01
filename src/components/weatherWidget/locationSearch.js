@@ -18,8 +18,12 @@ class LocationSearch extends Component {
                         helpers.log(data.data);
                         let suggestions = data.data.map(
                             (city) => {
+                                let cityWithoutCountry = city.name.replace(
+                                    'United States of America', 
+                                    'USA'
+                                    );
                                 return {
-                                    "value": city.name,
+                                    "value": cityWithoutCountry,
                                     "data": city
                                 };
                             }

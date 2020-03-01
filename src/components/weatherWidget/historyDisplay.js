@@ -47,7 +47,7 @@ class HistoryDisplay extends WeatherWidgetParent {
         return (
             <div className="weather-display">
                 <h2 className="weather-display__title">
-                    Last Week
+                    Past Week
                 </h2>   
 
                 <p className="weather-display__row">
