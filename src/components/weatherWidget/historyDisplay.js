@@ -1,54 +1,46 @@
-import React, { Component } from 'react';
+import React from 'react';
 import helpers from "./utils/helpers";
+import WeatherWidgetParent from './weatherWidgetParent';
 
-class HistoryDisplay extends Component {
+class HistoryDisplay extends WeatherWidgetParent {
 
     low = () => {
         if (!this.props.data) {
             return "";
         }
-        helpers.log(this.props.data);
-        let avg = (this.props.metric) ? this.props.data.avglowtemp_c : this.props.data.avglowtemp_f;
+        let data = this.props.data;
+        let avg = (this.isMetric()) ? data.avglowtemp_c : data.avglowtemp_f;
         avg = Math.round(avg);
-        let units = (this.props.metric) ? "\u00b0C" : "\u00b0F";
-
-        return `${avg}${units}`;
+        return this.tempString(avg);
     }
 
     temperature = () => {
         if (!this.props.data) {
             return "";
         }
-        helpers.log(this.props.data);
-        let avg = (this.props.metric) ? this.props.data.avgtemp_c : this.props.data.avgtemp_f;
+        let data = this.props.data;
+        let avg = (this.isMetric()) ? data.avgtemp_c : data.avgtemp_f;
         avg = Math.round(avg);
-        let units = (this.props.metric) ? "\u00b0C" : "\u00b0F";
-
-        return `${avg}${units}`;
+        return this.tempString(avg);
     }
 
     high = () => {
         if (!this.props.data) {
             return "";
         }
-        helpers.log(this.props.data);
-        let avg = (this.props.metric) ? this.props.data.avghightemp_c : this.props.data.avghightemp_f;
+        let data = this.props.data;
+        let avg = (this.isMetric()) ? data.avghightemp_c : data.avghightemp_f;
         avg = Math.round(avg);
-        let units = (this.props.metric) ? "\u00b0C" : "\u00b0F";
-
-        return `${avg}${units}`;
+        return this.tempString(avg);
     }
 
     precipitation = () => {
         if (!this.props.data) {
             return "";
         }
-        helpers.log(this.props.data);
-        let precipitation = (this.props.metric) ? this.props.data.precip_mm : this.props.data.precip_in;
-        precipitation = (Math.round(precipitation * 10) / 10).toFixed(2);
-        let units = (this.props.metric) ? "mm" : "in";
-
-        return `${precipitation} ${units}`;
+        let data = this.props.data;
+        let precipitation = (this.isMetric()) ? data.precip_mm : data.precip_in;
+        return this.precipString(precipitation);
     }
 
     render() {

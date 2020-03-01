@@ -24,15 +24,6 @@ class LocationSearch extends Component {
                                 };
                             }
                         );
-                        /*
-    id: 2599848
-    name: "Minnesota City, Minnesota, United States of America"
-    region: "Minnesota"
-    country: "United States of America"
-    lat: 44.09
-    lon: -91.75
-    url: "minnesota-city-minnesota-united-states-of-america"
-                        */
                         let result = {
                             suggestions: suggestions
                         };
@@ -69,7 +60,6 @@ class LocationSearch extends Component {
         return (
             <div className="weather-display__search">
                 <input
-                    size="50"
                     type="text"
                     id="locationSearch"
                     placeholder="City or Zip"

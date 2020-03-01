@@ -19,6 +19,8 @@
 
 .weather-display__search input {
   padding:.25em;
+  border-radius: .1em;
+  width: 100%;
 }
 
 .weather-display__icon_holder, .weather-display__title {
@@ -56,4 +58,10 @@ footer button {
 .autocomplete-suggestions {
   background-color: white;
   overflow: hidden;
+}
+
+.weather__title {
+  font-family: "Comic Sans MS", cursive, sans-serif;
+  text-transform: uppercase;
+  color: black;
 }

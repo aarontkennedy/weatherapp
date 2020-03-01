@@ -5,7 +5,7 @@ import helpers from "./utils/helpers";
 import WeatherDisplay from "./weatherDisplay";
 import ForecastDisplay from "./forecastDisplay";
 import HistoryDisplay from "./historyDisplay";
-
+import WonderStormTitle from "./wonderStormTitle";
 
 class WeatherWidget extends Component {
     constructor(props) {
@@ -61,6 +61,7 @@ class WeatherWidget extends Component {
                 helpers.log(data.data);
                 this.setState({ 
                     current: data.data.current,
+                    todaysForecast: data.data.forecast.forecastday[0].day,
                     tomorrow: data.data.forecast.forecastday[1].date,
                     twoDaysOut: data.data.forecast.forecastday[2].date,
                     threeDaysOut: data.data.forecast.forecastday[3].date,
@@ -190,7 +191,7 @@ class WeatherWidget extends Component {
         return (
             <div className="weather-widget">
                 <header>
-                    WonderStorm
+                    <WonderStormTitle />
                 </header>
 
                 <LocationSearch
@@ -201,6 +202,7 @@ class WeatherWidget extends Component {
                 <WeatherDisplay
                     metric = {this.state.metric}
                     data={this.state.current}
+                    forecast={this.state.todaysForecast}
                 />
                 <ForecastDisplay
                     title = {this.state.tomorrow}

@@ -12,6 +12,32 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import './components/weatherWidget/utils/jquery.autocomplete';
 
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { 
+    faCloud, 
+    // faCloudSunRain, 
+    // faCloudSun, 
+    // faCloudRain, 
+    // faCloudMoonRain, 
+    // faCloudMoon, 
+    // faCloudShowersHeavy,
+    // faThermometerThreeQuarters,
+    // faThermometerQuarter,
+    // faWind
+} from '@fortawesome/free-solid-svg-icons';
+library.add(
+    faCloud, 
+    // faCloudSunRain, 
+    // faCloudSun, 
+    // faCloudRain, 
+    // faCloudMoonRain, 
+    // faCloudMoon, 
+    // faCloudShowersHeavy,
+    // faThermometerThreeQuarters,
+    // faThermometerQuarter,
+    // faWind
+    );
+
 ReactDOM.render(<App />, document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change

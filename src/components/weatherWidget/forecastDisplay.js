@@ -1,8 +1,9 @@
-import React, { Component } from 'react';
+import React from 'react';
+import WeatherWidgetParent from './weatherWidgetParent';
 
 var moment = require('moment');
 
-class ForecastDisplay extends Component {
+class ForecastDisplay extends WeatherWidgetParent {
 
     getIcon = () => {
         if (!this.props.data || !this.props.data.condition) {
@@ -34,40 +35,35 @@ class ForecastDisplay extends Component {
         if (!this.props.data) {
             return "";
         }
-        let min = (this.props.metric) ? this.props.data.mintemp_c : this.props.data.mintemp_f;
-        let max = (this.props.metric) ? this.props.data.maxtemp_c : this.props.data.maxtemp_f;
-        min = Math.round(min);
-        max = Math.round(max);
-        let units = (this.props.metric) ? "\u00b0C" : "\u00b0F";
-
-        return `${min} - ${max}${units}`;
+        let data = this.props.data;
+        let min = (this.isMetric()) ? data.mintemp_c : data.mintemp_f;
+        let max = (this.isMetric()) ? data.maxtemp_c : data.maxtemp_f;
+        return this.maxMinTempString(min, max);
     }
 
     wind = () => {
         if (!this.props.data) {
             return "";
         }
-        let wind = (this.props.metric) ? this.props.data.maxwind_kph : this.props.data.maxwind_mph;
-        let units = (this.props.metric) ? "kph" : "mph";
-
-        return `${wind} ${units}`;
+        let data = this.props.data;
+        let wind = (this.isMetric()) ? data.maxwind_kph : data.maxwind_mph;
+        return this.windString(wind, "");
     }
 
     precipitation = () => {
         if (!this.props.data) {
             return "";
         }
-        let precipitation = (this.props.metric) ? this.props.data.totalprecip_mm : this.props.data.totalprecip_in;
-        let units = (this.props.metric) ? "mm" : "in";
-
-        return `${precipitation} ${units}`;
+        let data = this.props.data;
+        let precipitation = (this.isMetric()) ? data.totalprecip_mm : data.totalprecip_in;
+        return this.precipString(precipitation);
     }
 
     humidity = () => {
         if (!this.props.data) {
             return "";
         }
-        return this.props.data.avghumidity + "%";
+        return this.humidityString(this.props.data.avghumidity);
     }
              
     render() {

@@ -1,6 +1,7 @@
-import React, { Component } from 'react';
+import React from 'react';
+import WeatherWidgetParent from './weatherWidgetParent';
 
-class WeatherDisplay extends Component {
+class WeatherDisplay extends WeatherWidgetParent {
 
     getIcon = () => {
         if (!this.props.data || !this.props.data.condition) {
@@ -32,39 +33,54 @@ class WeatherDisplay extends Component {
         if (!this.props.data) {
             return "";
         }
-        if (this.props.metric) {
-            return  Math.round(this.props.data.temp_c) + "\u00b0C";
-        }
-        return Math.round(this.props.data.temp_f) + "\u00b0F";
+        let data = this.props.data;
+        let temp = this.isMetric() ? data.temp_c : data.temp_f;
+        return this.tempString(temp);
     }
 
     wind = () => {
         if (!this.props.data) {
             return "";
         }
-        let wind = this.props.data.wind_mph + " mph";
-        if (this.props.metric) {
-            wind = this.props.data.wind_kph  + " kph";
-        }
-        let direction = this.props.data.wind_dir;
-        return wind + " " + direction;
+        let data = this.props.data;
+        let wind = this.isMetric() ? data.wind_mph : data.wind_kph;
+        return this.windString(wind, data.wind_dir);
     }
 
     precipitation = () => {
         if (!this.props.data) {
             return "";
         }
-        if (this.props.metric) {
-            return this.props.data.precip_mm + " mm";
-        }
-        return this.props.data.precip_in + " in";
+        let data = this.props.data;
+        let precip = this.isMetric() ? data.precip_mm : data.precip_in;
+        return this.precipString(precip);
     }
 
     humidity = () => {
         if (!this.props.data) {
             return "";
         }
-        return this.props.data.humidity + "%";
+        return this.humidityString(this.props.data.humidity);
+    }
+
+    maxMinTemp = () => {
+        if (!this.props.forecast) {
+            return "";
+        }
+        let forecast = this.props.forecast;
+        const isMetric = this.isMetric();
+        let min = (isMetric) ? forecast.mintemp_c : forecast.mintemp_f;
+        let max = (isMetric) ? forecast.maxtemp_c : forecast.maxtemp_f;
+        return this.maxMinTempString(min, max);
+    }
+
+    predictedPrecipitation = () => {
+        if (!this.props.data) {
+            return "";
+        }
+        let forecast = this.props.forecast;
+        let precip = this.isMetric() ? forecast.totalprecip_mm : forecast.totalprecip_in;
+        return this.precipString(precip);
     }
 
     render() {
@@ -91,6 +107,15 @@ class WeatherDisplay extends Component {
                 <p className="weather-display__row">
                     <span className="weather-display__label">Humidity: </span>
                     <span className="weather-display__value">{this.humidity()}</span>
+                </p>
+
+                <p className="weather-display__row">
+                    <span className="weather-display__label">Forecast: </span>
+                    <span className="weather-display__value">{this.maxMinTemp()}</span>
+                </p>
+                <p className="weather-display__row">
+                    <span className="weather-display__label">Precipitation: </span>
+                    <span className="weather-display__value">{this.precipitation()}</span>
                 </p>
             </div>
         );
