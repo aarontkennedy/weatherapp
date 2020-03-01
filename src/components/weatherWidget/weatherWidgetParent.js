@@ -38,7 +38,7 @@ class WeatherWidgetParent extends Component {
     windString = (wind, direction) => {
         wind = Math.round(wind);
         let units = this.windSpeedUnit();
-        return `${wind} ${direction} ${units}`;
+        return `${wind} ${units} ${direction}`;
     }
 
     precipUnit = () => {
